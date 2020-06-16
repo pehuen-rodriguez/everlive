@@ -82,14 +82,21 @@ defmodule EverliveWeb.RoomChannel do
 
   def handle_in(
         "move",
-        %{"posX" => pos_x, "posY" => pos_y, "posZ" => pos_z},
+        %{
+          "posX" => pos_x,
+          "posY" => pos_y,
+          "posZ" => pos_z,
+          "rotX" => rot_x,
+          "rotY" => rot_y,
+          "rotZ" => rot_z
+        },
         socket = %Phoenix.Socket{assigns: %{user_id: user_id, room_id: room_id}}
       ) do
     Presence.update_presence(
       self(),
       topic(room_id),
       user_id,
-      %{pos_x: pos_x, pos_y: pos_y, pos_z: pos_z}
+      %{pos_x: pos_x, pos_y: pos_y, pos_z: pos_z, rot_x: rot_x, rot_y: rot_y, rot_z: rot_z}
     )
 
     {:reply, :ok, socket}
@@ -101,8 +108,11 @@ defmodule EverliveWeb.RoomChannel do
       user_id: user_id,
       username: username,
       pos_x: 0,
-      pos_y: 0,
+      pos_y: 1.75,
       pos_z: 0,
+      rot_x: 0,
+      rot_y: 0,
+      rot_z: 0,
       online_at: inspect(System.system_time(:second))
     }
   end
