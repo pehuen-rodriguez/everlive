@@ -39,4 +39,4 @@ jobs:
           port: ${{ secrets.SCP_PORT }}
           script: |
             cd /var/www/develop/live.e-ver/back/rel/everlive/bin
-            ./everlive restart
+            ./everlive daemon
