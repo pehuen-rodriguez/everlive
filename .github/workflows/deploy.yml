@@ -14,4 +14,4 @@ jobs:
           otp-version: '22.2'
           elixir-version: '1.9.4'
       - run: mix deps.get --only prod
-      - run: yes | SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }} MIX_ENV=prod mix release
+      - run: PORT=${{secrets.PORT}} SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }} MIX_ENV=prod mix release
