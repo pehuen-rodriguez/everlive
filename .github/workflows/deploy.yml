@@ -29,3 +29,14 @@ jobs:
           source: "_build/prod"
           target: "/var/www/develop/live.e-ver/back"
           strip_components: 2
+
+      - name: Restart daemon
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SCP_HOST }}
+          username: ${{ secrets.SCP_USERNAME }}
+          password: ${{ secrets.SCP_PASSWORD }}
+          port: ${{ secrets.SCP_PORT }}
+          script: |
+            cd /var/www/develop/live.e-ver/back/rel/everlive/bin
+            ./everlive restart
